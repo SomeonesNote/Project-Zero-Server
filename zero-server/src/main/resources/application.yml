@@ -1,45 +1,11 @@
 spring:
   application:
     name: zero-server
-
----
-# Development profile using in-memory H2 database
-spring:
-  config:
-    activate:
-      on-profile: dev
-  datasource:
-    driver-class-name: org.h2.Driver
-    url: jdbc:h2:mem:zero;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
-    username: sa
-    password:
-  jpa:
-    hibernate:
-      ddl-auto: create-drop
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
-
----
-# PostgreSQL profile for staging/production
-spring:
-  config:
-    activate:
-      on-profile: postgres
-  datasource:
-    driver-class-name: org.postgresql.Driver
-    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/zero}
-    username: ${SPRING_DATASOURCE_USERNAME:postgres}
-    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: false
-    properties:
-      hibernate:
-        format_sql: true
+  profiles:
+    active: dev
+    group:
+      local:
+        - dev
+      prod:
+        - prod
+        - secret

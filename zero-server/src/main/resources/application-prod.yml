@@ -1,0 +1,14 @@
+# PostgreSQL profile for staging/production
+spring:
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${secret.datasource.url}
+    username: ${secret.datasource.username}
+    password: ${secret.datasource.password}
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
